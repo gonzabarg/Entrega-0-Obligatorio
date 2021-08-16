@@ -38,14 +38,29 @@
 </head>
 
 <body class="text-center">
-  <div class="container p-5">
+  <!-- <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
+    </div> 
+  </div>-->
+  <form class="signin">
+    <img class="mb-4" src="img/login.png" alt width="250" height="100">
+    <h1 class="h3 mb-3 font-weight-normal">Ingresá a tu cuenta</h1>
+    <label for="inputEmail" class="sr-only">Correo electrónico</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus>
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required> 
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="recordar-mi-usuario">
+        Recordar mi usuario
+      </label>
+    </div> 
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Ir al sitio</button>
+  </form>
 
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>

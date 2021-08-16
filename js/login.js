@@ -1,6 +1,31 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
 
+let array = [];
+let botonLogin = document.getElementsByTagName("button")[0];
+botonLogin.id = "botonLogin";
+
+
+const loginUsuario = () => {
+
+  const mail = document.getElementById("inputEmail").value;
+  const contraseña = document.getElementById("inputPassword").value;
+  if (mail && contraseña) {
+    
+    document.getElementById("inputEmail").value = "";
+    document.getElementById("inputPassword").value = "";
+    array.push({mail:mail,contraseña:btoa(contraseña)});
+    window.localStorage.clear();
+    window.sessionStorage.setItem("usuarioActual", mail);
+    window.localStorage.setItem("array", JSON.stringify(array));
+    window.location = "index.html";
+
+  } else {
+    alert("Correo electrónico y contraseña no deben ser vacíos");
+  }
+};
+
+document.addEventListener("DOMContentLoaded",() => {
+    document.getElementById("botonLogin").addEventListener("click", loginUsuario);
 });
