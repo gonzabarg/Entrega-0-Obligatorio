@@ -12,19 +12,24 @@ const loginUsuario = () => {
   const mail = document.getElementById("inputEmail").value;
   const contraseña = document.getElementById("inputPassword").value;
   if (mail && contraseña) {
+
     
+
+    array.push({mail:mail,contraseña:btoa(contraseña)});
     document.getElementById("inputEmail").value = "";
     document.getElementById("inputPassword").value = "";
-    array.push({mail:mail,contraseña:btoa(contraseña)});
-    window.localStorage.clear();
-    window.sessionStorage.setItem("usuarioActual", mail);
+    
+    
     window.localStorage.setItem("array", JSON.stringify(array));
     window.location = "index.html";
 
   } else {
     alert("Correo electrónico y contraseña no deben ser vacíos");
   }
+  
 };
+
+
 
 document.addEventListener("DOMContentLoaded",() => {
     document.getElementById("botonLogin").addEventListener("click", loginUsuario);
