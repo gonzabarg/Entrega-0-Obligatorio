@@ -2,6 +2,9 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 
+let precioMinimo = undefined;
+let precioMaximo = undefined;
+
 let productsArray = [];
 
 function showProductList(array){
@@ -9,6 +12,9 @@ function showProductList(array){
     let htmlContentToAppend = "";
     for(let i = 0; i < array.length; i++){
         let product = array[i];
+
+        if (((precioMinimo == undefined) || (precioMinimo != undefined && parseInt(product.cost) >= precioMinimo)) &&
+        ((precioMaximo == undefined) || (precioMaximo != undefined && parseInt(product.cost) <= precioMaximo))){
 
         htmlContentToAppend += `
         
@@ -30,9 +36,10 @@ function showProductList(array){
             </a>
         </div>
         `
+        }
     }
 
-    let contenedor = document.getElementsByClassName("container")[1];
+    let contenedor = document.getElementsByClassName("container")[4];
     contenedor.id = "contenedorProductos";
     document.getElementById("contenedorProductos").innerHTML = htmlContentToAppend;
     
@@ -48,5 +55,38 @@ document.addEventListener("DOMContentLoaded", function (e) {
             //Muestro las categorías ordenadas
             showProductList(productsArray);
        }
+    });
+
+    document.getElementById("rangeFilterCount").addEventListener("click", function(){
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+        //de productos por categoría.
+        precioMinimo = document.getElementById("rangeFilterCountMin").value;
+        precioMaximo = document.getElementById("rangeFilterCountMax").value;
+
+        if ((precioMinimo != undefined) && (precioMinimo != "") && (parseInt(precioMinimo)) >= 0){
+            precioMinimo = parseInt(precioMinimo);
+        }
+        else{
+            precioMinimo = undefined;
+        }
+
+        if ((precioMaximo != undefined) && (precioMaximo != "") && (parseInt(precioMaximo)) >= 0){
+            precioMaximo = parseInt(precioMaximo);
+        }
+        else{
+            precioMaximo = undefined;
+        }
+
+        showProductList(productsArray);
+    });
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCountMin").value = "";
+        document.getElementById("rangeFilterCountMax").value = "";
+
+        precioMinimo = undefined;
+        precioMaximo = undefined;
+
+        showProductList(productsArray);
     });
 });
