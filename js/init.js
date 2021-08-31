@@ -45,4 +45,12 @@ var getJSONData = function(url){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
 
+  const obj = JSON.parse(localStorage.getItem("array")); 
+  let mostrarUsuario = "";
+  if (obj != null) {
+     mostrarUsuario = `<a class="py-2 d-none d-md-inline-block" href="cart.html">${obj[0].mail}</a>`
+  };
+
+  let menuPrincipal = document.getElementsByTagName("nav")[0].firstElementChild;
+  menuPrincipal.innerHTML += mostrarUsuario;
 });
