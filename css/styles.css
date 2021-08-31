@@ -147,3 +147,7 @@ a.custom-card:hover {
 main.pb-5 {
   padding-top: 4rem;
 }
+
+#searchBarContainer {
+  padding-top: 0.3rem;
+}

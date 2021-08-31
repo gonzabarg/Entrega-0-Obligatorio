@@ -4,7 +4,7 @@ const ORDEN_DESC_PRECIO = document.getElementById("sortDesc");
 const ORDEN_POR_REL = document.getElementById("sortByCount");
 let precioMinimo = undefined;
 let precioMaximo = undefined;
-
+const searchBar =  document.getElementById("searchBar");
 let productsArray = [];
 
 // Función que recorre el array proporcionado, chequea si hay un filtro de precio establecido y muestra los resultados al usuario.
@@ -124,5 +124,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
         precioMaximo = undefined;
 
         showProductList(productsArray);
+    });
+
+    searchBar.addEventListener("keyup", function(e){
+        const searchString = e.target.value.toLowerCase();
+        const productosFiltrados = productsArray.filter(product => {
+           return product.name.toLowerCase().includes(searchString) || product.description.toLowerCase().includes(searchString);
+        });
+        //console.log(searchString);
+        showProductList(productosFiltrados);
     });
 });
