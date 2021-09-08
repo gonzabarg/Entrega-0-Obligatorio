@@ -25,12 +25,39 @@
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+    <!-- <div class="container mt-5">
+      <div class="text-left">
+        <h1 id="nombreProducto"></h1>
+        <h2 id="precioProducto"></h2>
+      </div>
+    </div>  -->
+
+  <div class="container single-product">
+    <div class="row prd">
+      <div class="col-6" id="contenedorImagenes">
+        <img src="" alt="Chevrolet Onix" width="500px" id="imagenPrincipal">
+        <div class="row" id="contenedorMiniaturas"></div>
+      </div>
+      <div class="col-6">
+        <p>
+          <a href="category-info.html" id="categoriaProducto"></a>
+        </p>
+        <h1 id="nombreProducto"></h1>
+        <h4 id="precioProducto"></h4>
+        <p id="vendidosProducto"></p>
+        <a href="cart.html" class="btn btn-primary btn-block">Agregar al carrito</a>
+      </div>
+    </div>
+    <div class="row prd">
+      <h3>Productos Relacionados</h3>
+      <br>
+      <div class="row" id="productosRelacionados"></div>
+    </div>
+    <div class="row">
+      <h3>Descripción</h3>
+      <br>
+      <p id="descripcionProducto"></p>
     </div>
   </div>
   <footer class="text-muted">

@@ -151,3 +151,59 @@ main.pb-5 {
 #searchBarContainer {
   padding-top: 0.3rem;
 }
+
+.single-product {
+  margin-top: 80px;
+}
+
+/*.single-product .col-6 img {
+  padding: 0;
+}*/
+
+.single-product .col-6 {
+  padding: 20px;
+}
+
+.single-product h4 {
+  margin: 20px 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.row.prd {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  padding: 25px 0 25px 0;
+
+}
+
+.miniaturaRelacionados {
+  width: 200px;
+}
+
+#productosRelacionados {
+  padding: 30px 0 0 0;
+}
+
+.contenedorRelacionados {
+  padding: 50px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+}
+
+.nombreRelacionados{
+  display: block;
+  padding-top: 10px;
+}
+
+.mini {
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 4px; 
+  padding: 5px; 
+  width: 100px;
+  margin: 10px 0 0 5px;
+}
+
+.mini:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
