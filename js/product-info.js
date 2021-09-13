@@ -1,4 +1,6 @@
 var informacionProducto = {};
+let comentariosNuevos = [];
+
 
 function mostrarImagenes(array){
     let htmlContentToAppend = "";
@@ -60,6 +62,73 @@ function mostrarProductosRelacionados(array){
     document.getElementById("productosRelacionados").innerHTML = htmlContentToAppend;
 };
 
+function mostrarComentarios(array){
+    let htmlContentToAppend = "";
+
+    for (let i = 0; i < array.length; i++) {
+        
+        let comentario = array[i];
+
+
+        htmlContentToAppend += `
+        <div class="container com">
+            <h6 class= "usuario"><b>${comentario.user}</b></h6>
+            <p>${mostrarEstrellas(comentario)}</p>
+            <p class="fecha">${comentario.dateTime}</p>
+            <p class="comentario">${comentario.description}</p>
+        </div>
+        `
+    }
+    document.getElementById("commentInnerContainer").innerHTML = htmlContentToAppend;
+};
+
+function mostrarEstrellas(comentario) {
+    let contenidoHTML = "";
+
+    for (let i = 0; i < comentario.score; i++) {
+        contenidoHTML += `
+        <span class="fa fa-star checked"></span>
+        `
+    }
+    return contenidoHTML;
+};
+
+function agregarComentario(comentariosNuevos){
+
+    let contenidoHTML = "";
+ 
+
+    let obj = JSON.parse(localStorage.getItem("array"));
+    let descripcion = document.getElementById("comentarioUsuario").value;
+    let puntaje = document.getElementById("estrellas").value;
+    let usuario = obj[0].mail;
+    var today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;
+
+   comentariosNuevos.push({score: puntaje,description: descripcion,user: usuario,datetime: dateTime});
+
+    for (let i = 0; i < comentariosNuevos.length; i++) {
+
+    let array = comentariosNuevos[i];
+
+
+    contenidoHTML += `
+    <div class="container com">
+        <h6 class= "usuario"><b>${array.user}</b></h6>
+        <p>${mostrarEstrellas(array)}</p>
+        <p class="fecha">${array.datetime}</p>
+        <p class="comentario">${array.description}</p>
+    </div>
+    `
+    }
+
+    document.getElementById("commentInnerContainer").innerHTML += contenidoHTML;
+};
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -96,5 +165,23 @@ document.addEventListener("DOMContentLoaded", function(e){
 
             mostrarProductosRelacionados(producto);
         }
+    });
+
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok") {
+
+            producto = resultObj.data;
+
+            mostrarComentarios(producto);
+
+        }
+    });
+
+    botonComentario.addEventListener("click", function(){
+
+       agregarComentario(comentariosNuevos);
+       
     })
+
+
 });

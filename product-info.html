@@ -54,10 +54,26 @@
       <br>
       <div class="row" id="productosRelacionados"></div>
     </div>
-    <div class="row">
+    <div class="row prd" id="descripcionContainer">
       <h3>Descripción</h3>
       <br>
       <p id="descripcionProducto"></p>
+    </div>
+  
+    <div class="row prd" id="commentBoxContainer">
+      <h3>Comentarios</h3>
+      <div class="row prd" id="commentInnerContainer">
+      </div>
+      <div class="row prd" id="crearComentario">
+        <form>
+          <textarea id="comentarioUsuario" name="comentario" placeholder="Dejá tu comentario aquí" rows="4" cols="143"></textarea>
+          <br>
+          <label for="estrellas" id="labelEstrellas"><span class="fa fa-star checked"></span>
+              <input type="number" name="estrellas" id="estrellas" min="1" max="5">
+          </label>
+        <a href="#self" class="btn btn-primary" id="botonComentario">Enviar</a>
+        </form>
+      </div>
     </div>
   </div>
   <footer class="text-muted">
