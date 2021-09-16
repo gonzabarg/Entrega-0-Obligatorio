@@ -36,42 +36,42 @@
   <div class="container single-product">
     <div class="row prd">
       <div class="col-6" id="contenedorImagenes">
-        <img src="" alt="Chevrolet Onix" width="500px" id="imagenPrincipal">
-        <div class="row" id="contenedorMiniaturas"></div>
+        <img src="" alt="Chevrolet Onix" width="500px" id="mainImg">
+        <div class="row" id="miniaturesContainer"></div>
       </div>
       <div class="col-6">
         <p>
-          <a href="category-info.html" id="categoriaProducto"></a>
+          <a href="category-info.html" id="productCategory"></a>
         </p>
-        <h1 id="nombreProducto"></h1>
-        <h4 id="precioProducto"></h4>
-        <p id="vendidosProducto"></p>
+        <h1 id="productName"></h1>
+        <h4 id="productPrice"></h4>
+        <p id="productSoldCount"></p>
         <a href="cart.html" class="btn btn-primary btn-block">Agregar al carrito</a>
       </div>
     </div>
     <div class="row prd">
       <h3>Productos Relacionados</h3>
       <br>
-      <div class="row" id="productosRelacionados"></div>
+      <div class="row" id="relatedProducts"></div>
     </div>
     <div class="row prd" id="descripcionContainer">
       <h3>Descripción</h3>
       <br>
-      <p id="descripcionProducto"></p>
+      <p id="productDescription"></p>
     </div>
   
     <div class="row prd" id="commentBoxContainer">
       <h3>Comentarios</h3>
       <div class="row prd" id="commentInnerContainer">
       </div>
-      <div class="row prd" id="crearComentario">
+      <div class="row prd" id="createComment">
         <form>
-          <textarea id="comentarioUsuario" name="comentario" placeholder="Dejá tu comentario aquí" rows="4" cols="143"></textarea>
+          <textarea id="userComment" name="comentario" placeholder="Dejá tu comentario aquí" rows="4" cols="143"></textarea>
           <br>
-          <label for="estrellas" id="labelEstrellas"><span class="fa fa-star checked"></span>
-              <input type="number" name="estrellas" id="estrellas" min="1" max="5">
+          <label for="stars" id="starsLabel"><span class="fa fa-star checked"></span>
+              <input type="number" name="estrellas" id="stars" min="1" max="5">
           </label>
-        <a href="#self" class="btn btn-primary" id="botonComentario">Enviar</a>
+        <a href="#self" class="btn btn-primary" id="commentButton">Enviar</a>
         </form>
       </div>
     </div>

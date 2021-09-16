@@ -1,130 +1,144 @@
-var informacionProducto = {};
-let comentariosNuevos = [];
+let newComments = [];
 
 
-function mostrarImagenes(array){
+function showImg(array){
     let htmlContentToAppend = "";
 
     for (let i = 0; i < array.length; i++) {
-        let imagen = array[i];
+        let img = array[i];
 
         htmlContentToAppend += `
-        <img class="mini" src="`+ imagen +`" alt="">
+        <img class="mini" src="`+ img +`" alt="">
       `
     }
-    document.getElementById("contenedorMiniaturas").innerHTML += htmlContentToAppend;
-    agrandarImgSeleccionada();
+    document.getElementById("miniaturesContainer").innerHTML += htmlContentToAppend;
+    enlargeSelectedImg();
 };
 
-function agrandarImgSeleccionada(array) {
-    let imgPrincipal = document.getElementById("imagenPrincipal");
-    let imgMiniatura = document.getElementsByClassName("mini");
+function enlargeSelectedImg(array) {
+    let mainImg = document.getElementById("mainImg");
+    let imgMini = document.getElementsByClassName("mini");
 
-    imgMiniatura[0].onclick = function(){
-        imgPrincipal.src = imgMiniatura[0].src;
+    imgMini[0].onclick = function(){
+        mainImg.src = imgMini[0].src;
     };
 
-    imgMiniatura[1].onclick = function(){
-        imgPrincipal.src = imgMiniatura[1].src;
+    imgMini[1].onclick = function(){
+        mainImg.src = imgMini[1].src;
     };
 
-    imgMiniatura[2].onclick = function(){
-        imgPrincipal.src = imgMiniatura[2].src;
+    imgMini[2].onclick = function(){
+        mainImg.src = imgMini[2].src;
     };
 
-    imgMiniatura[3].onclick = function(){
-        imgPrincipal.src = imgMiniatura[3].src;
+    imgMini[3].onclick = function(){
+        mainImg.src = imgMini[3].src;
     };
 
-    imgMiniatura[4].onclick = function(){
-        imgPrincipal.src = imgMiniatura[4].src;
+    imgMini[4].onclick = function(){
+        mainImg.src = imgMini[4].src;
     };
 
 };
 
-function mostrarProductosRelacionados(array){
+function showRelatedProducts(array){
     let htmlContentToAppend = "";
 
     for (let i = 0; i < array.length; i++) {
-        let producto = array[i];
-        if(producto === array[1] || producto === array[3]) {
+        let product = array[i];
+        if(product === array[1] || product === array[3]) {
 
         htmlContentToAppend += `
-        <div class="contenedorRelacionados">
-            <img src="${producto.imgSrc}" class="miniaturaRelacionados" alt="Portada">
-            <h5 class="nombreRelacionados">
-                <a href="product-info.html">${producto.name}</a>
+        <div class="relatedProductsContainer">
+            <img src="${product.imgSrc}" class="relatedProductsMini" alt="Portada">
+            <h5 class="relatedProductsName">
+                <a href="product-info.html">${product.name}</a>
             </h5>
         </div>
          `
         }
     }
-    document.getElementById("productosRelacionados").innerHTML = htmlContentToAppend;
+    document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
 };
 
-function mostrarComentarios(array){
+function showComments(array){
     let htmlContentToAppend = "";
 
     for (let i = 0; i < array.length; i++) {
         
-        let comentario = array[i];
+        let comment = array[i];
 
 
         htmlContentToAppend += `
         <div class="container com">
-            <h6 class= "usuario"><b>${comentario.user}</b></h6>
-            <p>${mostrarEstrellas(comentario)}</p>
-            <p class="fecha">${comentario.dateTime}</p>
-            <p class="comentario">${comentario.description}</p>
+            <h6 class= "user"><b>${comment.user}</b></h6>
+            <p>${showStars(comment)}</p>
+            <p class="date">${comment.dateTime}</p>
+            <p class="comment">${comment.description}</p>
         </div>
         `
     }
     document.getElementById("commentInnerContainer").innerHTML = htmlContentToAppend;
 };
 
-function mostrarEstrellas(comentario) {
-    let contenidoHTML = "";
+function showStars(comment) {
+    let htmlContent = "";
 
-    for (let i = 0; i < comentario.score; i++) {
-        contenidoHTML += `
+    for (let i = 0; i < comment.score; i++) {
+        if(comment.score >= 1 && comment.score <= 5) {
+            htmlContent += `
         <span class="fa fa-star checked"></span>
         `
+        }
     }
-    return contenidoHTML;
+    return htmlContent;
 };
 
-function agregarComentario(comentariosNuevos){
+function addComment(newComments){
 
-    let contenidoHTML = "";
- 
+    let htmlContent = "";
+
 
     let obj = JSON.parse(localStorage.getItem("array"));
-    let descripcion = document.getElementById("comentarioUsuario").value;
-    let puntaje = document.getElementById("estrellas").value;
-    let usuario = obj[0].mail;
+    let description = document.getElementById("userComment").value;
+    let score = document.getElementById("stars").value;
+    let user = obj[0].mail;
     var today = new Date();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date+' '+time;
 
-   comentariosNuevos.push({score: puntaje,description: descripcion,user: usuario,datetime: dateTime});
-
-    for (let i = 0; i < comentariosNuevos.length; i++) {
-
-    let array = comentariosNuevos[i];
 
 
-    contenidoHTML += `
-    <div class="container com">
-        <h6 class= "usuario"><b>${array.user}</b></h6>
-        <p>${mostrarEstrellas(array)}</p>
-        <p class="fecha">${array.datetime}</p>
-        <p class="comentario">${array.description}</p>
-    </div>
-    `
+   
+
+    
+    if (description == "" || score == "") {
+
+         alert('Debe completar los campos "Comentarios" y "Estrellas"');
+
+    } else {
+
+        newComments.push({score: score,description: description,user: user,datetime: dateTime});
+
+        for (let i = 0; i < newComments.length; i++) {
+
+            let array = newComments[i];
+
+
+            htmlContent = `
+            <div class="container com">
+                <h6 class= "user"><b>${array.user}</b></h6>
+                <p>${showStars(array)}</p>
+                <p class="date">${array.datetime}</p>
+                <p class="comment">${array.description}</p>
+            </div>
+            `
+        }
     }
 
-    document.getElementById("commentInnerContainer").innerHTML += contenidoHTML;
+    document.getElementById("commentInnerContainer").innerHTML += htmlContent;
+
 };
 
 
@@ -135,24 +149,24 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            producto = resultObj.data;
+            product = resultObj.data;
 
-            let nombreProducto  = document.getElementById("nombreProducto");
-            let precioProducto = document.getElementById("precioProducto");
-            let descripcionProducto = document.getElementById("descripcionProducto");
-            let categoriaProducto = document.getElementById("categoriaProducto");
-            let vendidosProducto = document.getElementById("vendidosProducto");
-            let imagenPrincipal = document.getElementById("imagenPrincipal");
+            let productName  = document.getElementById("productName");
+            let productPrice = document.getElementById("productPrice");
+            let productDescription = document.getElementById("productDescription");
+            let productCategory = document.getElementById("productCategory");
+            let productSoldCount = document.getElementById("productSoldCount");
+            let mainImg = document.getElementById("mainImg");
         
-            nombreProducto.innerHTML = producto.name;
-            precioProducto.innerHTML = `${producto.currency + producto.cost}`;
-            descripcionProducto.innerHTML = producto.description;
-            categoriaProducto.innerHTML = producto.category;
-            vendidosProducto.innerHTML = `${producto.soldCount} vendidos`;
-            imagenPrincipal.src = producto.images[0];
+            productName.innerHTML = product.name;
+            productPrice.innerHTML = `${product.currency + product.cost}`;
+            productDescription.innerHTML = product.description;
+            productCategory.innerHTML = product.category;
+            productSoldCount.innerHTML = `${product.soldCount} vendidos`;
+            mainImg.src = product.images[0];
 
             //Muestro las imagenes en forma de galería
-            mostrarImagenes(producto.images);
+            showImg(product.images);
         }
     });
 
@@ -161,25 +175,28 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok") {
 
-            producto = resultObj.data;
+            product = resultObj.data;
 
-            mostrarProductosRelacionados(producto);
+            showRelatedProducts(product);
         }
     });
 
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
         if (resultObj.status === "ok") {
 
-            producto = resultObj.data;
+            product = resultObj.data;
 
-            mostrarComentarios(producto);
+            showComments(product);
 
         }
     });
 
-    botonComentario.addEventListener("click", function(){
+    commentButton.addEventListener("click", function(){
 
-       agregarComentario(comentariosNuevos);
+       console.log(addComment(newComments));
+
+       document.getElementById("stars").value = "";
+       document.getElementById("userComment").value = "";
        
     })
 
