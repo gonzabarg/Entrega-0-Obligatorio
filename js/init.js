@@ -40,6 +40,13 @@ var getJSONData = function(url){
     });
 }
 
+function endSession() {
+  
+  window.localStorage.clear();
+
+  window.location = "login.html";
+};
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -48,9 +55,21 @@ document.addEventListener("DOMContentLoaded", function(e){
   const obj = JSON.parse(localStorage.getItem("array")); 
   let mostrarUsuario = "";
   if (obj != null) {
-     mostrarUsuario = `<a class="py-2 d-none d-md-inline-block" href="cart.html">${obj[0].mail}</a>`
+     mostrarUsuario = `<div class="dropdown">
+     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     ${obj[0].mail}
+     </button>
+     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       <a class="dropdown-item" href="cart.html">Mi Carrito</a>
+       <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
+       <a class="dropdown-item" onclick="endSession()" href="">Cerrar Sesión</a>
+     </div>
+   </div>
+   `
   };
 
   let menuPrincipal = document.getElementsByTagName("nav")[0].firstElementChild;
   menuPrincipal.innerHTML += mostrarUsuario;
 });
+
+//<a class="py-2 d-none d-md-inline-block" href="cart.html"></a>

@@ -265,3 +265,7 @@ main.pb-5 {
   float: right;
   margin-top: 10px;
 }
+
+a.dropdown-item:hover{
+  color: #007bff;
+}

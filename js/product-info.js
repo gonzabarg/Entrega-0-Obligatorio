@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     commentButton.addEventListener("click", function(){
 
-       console.log(addComment(newComments));
+       addComment(newComments);
 
        document.getElementById("stars").value = "";
        document.getElementById("userComment").value = "";
