@@ -19,27 +19,15 @@ function enlargeSelectedImg(array) {
     let mainImg = document.getElementById("mainImg");
     let imgMini = document.getElementsByClassName("mini");
 
-    imgMini[0].onclick = function(){
-        mainImg.src = imgMini[0].src;
+    for (let i = 0; i < imgMini.length; i++){
+        imgMini[i].onclick = function(){
+            mainImg.src = imgMini[i].src;
+        };
     };
-
-    imgMini[1].onclick = function(){
-        mainImg.src = imgMini[1].src;
-    };
-
-    imgMini[2].onclick = function(){
-        mainImg.src = imgMini[2].src;
-    };
-
-    imgMini[3].onclick = function(){
-        mainImg.src = imgMini[3].src;
-    };
-
-    imgMini[4].onclick = function(){
-        mainImg.src = imgMini[4].src;
-    };
-
 };
+
+
+
 
 function showRelatedProducts(array){
     let htmlContentToAppend = "";
