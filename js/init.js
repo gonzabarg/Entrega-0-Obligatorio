@@ -5,6 +5,7 @@ const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json
 const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
+const CART_INFO_URL_2 = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
 var showSpinner = function(){
@@ -44,7 +45,7 @@ function endSession() {
   
   window.localStorage.clear();
 
-  window.location = "login.html";
+  window.location = "index.html";
 };
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -72,4 +73,3 @@ document.addEventListener("DOMContentLoaded", function(e){
   menuPrincipal.innerHTML += mostrarUsuario;
 });
 
-//<a class="py-2 d-none d-md-inline-block" href="cart.html"></a>

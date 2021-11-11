@@ -20,30 +20,30 @@ function showProductList(array){
 
         htmlContentToAppend += `
         
-        <div class="list-group" id = "cat-list-container">
+        <div class="col-md-6">
 
-            <a href="product-info.html" class = "list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${product.imgSrc}" alt="${product.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${product.name}</h4>
-                            <small class="text-muted">${product.currency} ${product.cost}</small>
-                        </div>
-                        <p class="mb-1">${product.description}</p>
-                    </div>
+            <div class="card" id="productCard">
+                <a href= "product-info.html">
+                    <img id="productCardImg" src="${product.imgSrc}" alt= "${product.description}">
+                </a>
+
+                <div class="card-body" id="userDataBody">
+                    <a href= "product-info.html">
+                        <h4 class="userDataItem">${product.name}</h4>
+                    </a>
+                    <p class="userDataItem"><b>${product.currency} ${product.cost}</b></p>
+                    <p class="userDataItem">${product.description}</p>
+
+
                 </div>
-            </a>
+            </div>
         </div>
         `
         }
     }
 
-    let contenedor = document.getElementsByClassName("container")[4];
-    contenedor.id = "contenedorProductos";
-    document.getElementById("contenedorProductos").innerHTML = htmlContentToAppend;
+    let contenedor = document.getElementById("productsAlbumContainer");
+    contenedor.innerHTML = htmlContentToAppend;
     
 };
 

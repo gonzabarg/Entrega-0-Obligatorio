@@ -11,6 +11,8 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
   <style>
     .bd-placeholder-img {
@@ -43,14 +45,207 @@
 
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <main role="main" class="pb-5">
+    <div class="text-center p-4">
+      <h2>Carrito de compras</h2>
+      <p class="lead">Finalizá tu compra!</p>
     </div>
-  </div>
+
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <table class="table table-hover" id="cartTable">
+            <thead>
+              <tr>
+                <th colspan="2">Artículo</th>
+                <th>Costo Unitario</th>
+                <th>Cantidad</th>
+                <th>Costo total del producto</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+            <tfoot>
+              <tr id="subtotalRow">
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="col-md-6 mt-3">
+          <div class="border border-gainsboro">
+            <div class="border-bottom border-gainsboro">
+              <p class="text-uppercase mb-0 methodsContainer"><strong>Forma de pago</strong></p>
+            </div>
+            <div class="totals-item d-flex align-items-center justify-content-between mt-3 methodsContainer">
+              <p>Tarjeta de crédito</p>
+              <input type="radio" id="creditCard" value="creditCard" name="paymentMethod" data-toggle="modal" data-target="#creditCardModal" required>
+            </div>
+            <div class="totals-item d-flex align-items-center justify-content-between mt-3 methodsContainer">
+              <p>Transferencia bancaria</p>
+              <input type="radio" id="bankTransfer" value="bankTransfer" name="paymentMethod" data-toggle="modal" data-target="#bankTransferModal" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-3">
+          <div class="border border-gainsboro">
+            <div class="border-bottom border-gainsboro">
+              <p class="text-uppercase mb-0 methodsContainer"><strong>Metodo de envío</strong></p>
+            </div>
+            <div class="totals-item d-flex align-items-center justify-content-between mt-3 methodsContainer">
+              <p>Retiro por pick-up center</p>
+              <input type="radio" id="pickUp" value="pickUp" name="deliveryMethod" required>
+            </div>
+            <div class="totals-item d-flex align-items-center justify-content-between mt-3 methodsContainer">
+              <p>Envío a domicilio</p>
+              <input type="radio" id="delivery" value="delivery" name="deliveryMethod" data-toggle="modal" data-target="#deliveryModal" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL TARJETA DE CRÉDITO-->
+      <div class="modal fade" id="creditCardModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Tarjeta de crédito</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="methodsContainer col-md-12" id="cardNameContainer">
+                    <label for="cardName">Nombre del titular</label>
+                    <input type="text" id="cardName" name="cardName">
+                  </div>
+                  <div class="methodsContainer col-md-12" id="cardNumberContainer">
+                    <label for="cardNumber">Número de tarjeta</label>
+                    <input type="text" id="cardNumber" name="cardNumber">
+                  </div>
+                  <div class="methodsContainer col-md-6" id="expiracyDateContainer">
+                    <label for="expiracyDate">Vencimiento</label>
+                    <input type="text" id="expiracyDate" name="expiracyDate">
+                  </div>
+                  <div class="methodsContainer col-md-6" id="securityNumberContainer">
+                    <label for="securityNumber">Código de seguridad</label>
+                    <input type="text" id="securityNumber" name="securityNumber" placeholder="xxx">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">
+                Continuar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL TRANSFERENCIA BANCARIA-->
+
+      <div class="modal fade" id="bankTransferModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Transferencia bancaria</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="methodsContainer col-md-12" id="accountNameContainer">
+                    <label for="accountName">Nombre del titular</label>
+                    <input type="text" id="accountName" name="accountName">
+                  </div>
+                  <div class="methodsContainer col-md-12" id="accountNumberContainer">
+                    <label for="accountNumber">Número de cuenta</label>
+                    <input type="text" id="accountNumber" name="accountNumber">
+                  </div>
+                  <div class="methodsContainer col-md-12" id="bankNameContainer">
+                    <label for="bankName">Institución bancaria</label>
+                    <select name="bankName" id="bankName">
+                      <option value="Santander"> Santander</option>
+                      <option value="Scotiabank">Scotiabank</option>
+                      <option value="BROU">BROU</option>
+                      <option value="Itaú">Itaú</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">
+                Continuar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--MODAL ENVIO A DOMICILIO-->
+
+      <div class="modal fade" id="deliveryModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Opciones de envío</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="methodsContainer col-md-12" id="deliveryAdressContainer">
+                    <label for="deliveryAdress">Dirección de envío</label>
+                    <input type="text" id="deliveryAdress" name="deliveryAdress">
+                  </div>
+                  <div class="methodsContainer col-md-12" id="deliveryCountryContainer">
+                    <label for="deliveryCountry">País</label>
+                    <input type="text" id="deliveryCountry" name="deliveryCountry">
+                  </div>
+                  <div class="methodsContainer col-md-12" id="deliveryOptionContainer">
+                    <label for="standardDelivery">Standard (12 - 15 días)</label>
+                    <input type="radio" id="standardDelivery" value="standardDelivery" name="deliveryMethod">
+                    <br>
+                    <label for="expressDelivery">Express (5 - 8 días)</label>
+                    <input type="radio" id="expressDelivery" value="expressDelivery" name="deliveryMethod">
+                    <br>
+                    <label for="premiumDelivery">Premium (2 - 5 días)</label>
+                    <input type="radio" id="premiumDelivery" value="premiumDelivery" name="deliveryMethod">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">
+                Continuar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    
+      <!-- <div class="row cartContainer">
+          <div class="col-10 cartContainer">
+
+          </div>
+        </div> -->  
+
+  </main>
+
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

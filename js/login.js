@@ -7,7 +7,7 @@ let botonLogin = document.getElementsByTagName("button")[0];
 botonLogin.id = "botonLogin";
 
 
-const loginUsuario = () => {
+var loginUsuario = () => {
 
   const mail = document.getElementById("inputEmail").value;
   const contraseña = document.getElementById("inputPassword").value;

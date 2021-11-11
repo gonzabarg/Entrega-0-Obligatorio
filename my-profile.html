@@ -10,6 +10,7 @@
   <title>eMercado - Todo lo que busques está aquí</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <style>
@@ -43,14 +44,59 @@
 
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+
+  <div class="text-center p-4">
+    <h1>Datos personales</h1>
   </div>
+
+   <div class="container-fluid" id="containerMiPerfil">
+     <div class="row" id="filaMiPerfil">
+       <div class="col-md-6" id="containerFotoPerfil">
+         <div class="card" id="userDataCard">
+            <img class="card-img-top" src="../Entrega-0-Obligatorio/img/user.png">
+
+           <div class="card-body" id="userDataBody">
+             <ul class="userDataList">
+               <li class="userDataItem" id="storedUserName">Nombre</li>
+               <li class="userDataItem" id="storedEmail">Correo electrónico</li>
+               <li class="userDataItem" id="storedDateBirth">Fecha de nacimiento</li>
+               <li class="userDataItem" id="storedPhone">Telefono</li>
+             </ul>
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6" id="containerInfo">
+          <form>
+            <div class="container" style="width: 100%;">
+              <div class="formElementContainer">
+                <label for="firstName">Nombre</label><br>
+                <input type="text" id="firstName" class="inputPersonalData" placeholder="Ingresá tu nombre" required>
+              </div>
+              <div class="formElementContainer">
+                <label for="lastName">Apellidos</label><br>
+                <input type="text" id="lastName" class="inputPersonalData"  placeholder="Ingresá tus apellidos" required>
+              </div>
+              <div class="formElementContainer">
+                <label for="dateBirth">Fecha de nacimiento</label><br>
+                <input type="date" id="dateBirth" class="inputPersonalData"  placeholder="Ingresá tu fecha de nacimiento" required>
+              </div>
+              <div class="formElementContainer">
+                <label for="email">Correo electrónico</label><br>
+                <input type="text" id="email" class="inputPersonalData"  placeholder="Ingresá tu correo electrónico" required>
+              </div>
+              <div class="formElementContainer">
+                <label for="phoneNumber">Teléfono</label><br>
+                <input type="text" id="phoneNumber" class="inputPersonalData"  placeholder="Ingresá tu número" required>
+              </div>
+              <div class="formElementContainer">
+                <button href="" class="btn btn-primary btn-block" id="personalDataBtn">Actualizar información</button>
+              </div>
+            </div>
+          </form>
+       </div>
+      </div>
+   </div>
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>

@@ -38,7 +38,9 @@ function showRelatedProducts(array){
 
         htmlContentToAppend += `
         <div class="relatedProductsContainer">
-            <img src="${product.imgSrc}" class="relatedProductsMini" alt="Portada">
+           <a href="product-info.html"> 
+                <img src="${product.imgSrc}" class="relatedProductsMini" alt="Portada">
+            </a>
             <h5 class="relatedProductsName">
                 <a href="product-info.html">${product.name}</a>
             </h5>
