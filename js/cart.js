@@ -1,74 +1,60 @@
 
-
-
-
 function showProductsInCart(object) {
     
     let htmlContentToAppend = "";
     let cartData = object.articles;
     let subtotal = 0;
+
+
     
     for (let i = 0; i < cartData.length; i++) {
          let  table = cartData[i];
          let unitCost = table.unitCost;
+         let prodCount = table.count;
          
          if (table.currency == "USD"){ 
              unitCost *= 40;
-
+             table.currency = "UYU";
          }
 
+         
+
         htmlContentToAppend += `
-         <tr>
+         <tr class="table-row">
           <td class="tableImageContainer">
             <img src= "${table.src}" class="tableImage"></img>
           </td>
           <td>
             <p>${table.name}</p>
           </td> 
-          <td>
+          <td class="item-price">
             ${table.currency}
-            ${table.unitCost}
+            ${unitCost}
+          </td>
+          <td id= "countInputCell">
+            <input type="number" class="prodCountInput" id="prodCount`+[i+1]+`" value="${prodCount}">
+          </td>
+          <td class="item-total-cost">
+            ${table.currency}
+            ${unitCost*prodCount}
           </td>
           <td>
-            <input type= "number" value= "${table.count}">
-          </td>
-          <td>
-            ${table.currency}
-            ${table.unitCost * table.count}
+            <button class="removeArticleBtn">
+              <span class="fa fa-trash"></span> 
+            </button>
           </td>
 
         `
-        subtotal += getTotalProductCost(unitCost, table.count);
+        subtotal += getTotalProductCost(unitCost, prodCount);
+        console.log(prodCount);
     };
     
     document.getElementById("tableBody").innerHTML += htmlContentToAppend;
     getSubtotal(subtotal);
+    
 };
 
-{/* <div class="border border-gainsboro p-3 mt-3 clearfix item">
-<div class="text-lg-left">
-  <i class="fa fa-ticket fa-2x text-center" aria-hidden="true"></i>
-</div>
-<div class="col-lg-5 col-5 text-lg-left">
-  <h3 class="h6 mb-0"><img src= "${table.src}></img>
-    <small>${table.unitCost}</small>
-  </h3>
-</div>
-<div class="product-price d-none">50</div>
-<div class="pass-quantity col-lg-3 col-md-4 col-sm-3">
-  <label for="pass-quantity" class="pass-quantity">Quantity</label>
-  <input class="form-control" type="number" value="${table.count}" min="1">
-</div>
-<div class="col-lg-2 col-md-1 col-sm-2 product-line-price pt-4">
-  <span class="product-line-price">${table.unitCost*table.count}
-  </span>
-</div>
-<div class="remove-item pt-4">
-  <button class="remove-product btn-light">
-    Delete
-  </button>
-</div>
-</div> */}
+
 
 
 function getTotalProductCost (x,y) {
@@ -79,7 +65,7 @@ function getSubtotal(x) {
 
     let htmlContentToAppend = "";
 
-    htmlContentToAppend = `<td id="subtotal" colspan="5"><b>Subtotal</b> 
+    htmlContentToAppend = `<td id="subtotal" colspan="6"><b>Subtotal</b> 
     UYU
     ${x}
     </td>`;
@@ -88,7 +74,45 @@ function getSubtotal(x) {
 };
 
 
+// OJO CON ESTO
 
+function updateCartTotal() {
+  let cartItemsContainer = document.getElementById("tableBody");
+
+  let cartRows = cartItemsContainer.getElementsByClassName("table-row");
+  console.log(cartRows);
+  let total = 0;
+
+
+  for (let i = 0; i < cartRows.length; i++) {
+
+    let cartRow = cartRows[i];
+    let itemPrice = cartRow.getElementsByClassName("item-total-cost")[0];
+    let itemQuantity = cartRow.getElementById("prodCount ${i+1}");
+
+    let price = parseFloat(itemPrice.innerHTML.replace('UYU', ''));
+    let  quantity = itemQuantity.value;
+
+
+    total += (price*quantity);
+
+  }
+
+  getSubtotal(total);
+
+};
+
+function quantityChanged(event){
+
+  var input = event.target;
+
+  if (isNaN(input.value) || input.value <= 0 ){
+
+    input.value = 1;
+  } 
+
+  updateCartTotal();
+}
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -96,15 +120,42 @@ function getSubtotal(x) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
 
+
     getJSONData(CART_INFO_URL_2).then(function(resultObj){
         if (resultObj.status == "ok") {
             cartData = resultObj.data;
-
-            showProductsInCart(cartData);
-        }
-    });
     
+            showProductsInCart(cartData);
+         }
+    });
 
+    var prodCountInputs = document.getElementsByClassName("prodCountInput");
+
+    for (let i = 0; i < prodCountInputs.length; i++) {
+
+      var input = prodCountInputs[i];
+
+      input.addEventListener('change', quantityChanged);
+    }
+    // var removeArticleBtns = document.getElementsByClassName("removeArticleBtn");
+
+    // console.log(removeArticleBtns);
+
+    // for (let i = 0; i < removeArticleBtns.length; i++) {
+
+    //   var btn = removeArticleBtns[i];
+
+    //   btn.addEventListener('click', function(e){
+    //     var btnClicked = e.target;
+
+    //     btnClicked.parentElement.parentElement.remove();
+
+    //   })
+    // }
+
+
+
+    
      
 });
 

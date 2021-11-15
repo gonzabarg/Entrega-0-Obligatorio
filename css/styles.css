@@ -497,3 +497,6 @@ label > p {
   display: block;
 }
 
+.removeArticleBtn {
+  margin: 1em;
+}
